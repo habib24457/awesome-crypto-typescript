@@ -1,0 +1,85 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.home{
+    background-color: #282c34;
+    height: 100vh;
+    width: 100vw;
+}
+
+.bloc-tabs {
+    display: flex;
+  }
+  .tabs {
+    padding: 15px;
+    text-align: center;
+    width: 50%;
+    background: rgba(241, 229, 229, 0.075);
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.274);
+    box-sizing: content-box;
+    position: relative;
+    outline: none;
+    color: white;
+    font-size: larger;
+    font-weight: bold;
+  }
+  .tabs:not(:last-child){
+    border-right: 1px solid rgba(231, 225, 225, 0.274);
+  }
+  
+  .active-tabs  {
+    background: rgb(171, 215, 219);
+    border-bottom: 1px solid transparent;
+  }
+  
+  .active-tabs::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 2px);
+    height: 5px;
+    background: rgb(188, 190, 194);
+  }
+  
+  
+  
+  button {
+    border: none;
+    
+  }
+  .content-tabs {
+    flex-grow : 1;
+  }
+  .content {
+    background: transparent;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+  .content h2 {
+    padding: 0px 0 5px 0px;
+  }
+ 
+  .content p {
+    width: 100%;
+    height: 100%;
+  }
+  .active-content {
+    display: block;
+  }
+
+  .form-design {
+      border: 2px solid rgb(150, 171, 199);
+  }
+
+
+  .component-stage{
+
+  }

@@ -1,0 +1,32 @@
+.table-wrapper{
+    max-height: 80vh;
+}
+
+.text-design{
+    color:white;
+}
+
+.button-design{
+    height: 35px;
+    width: 65px;
+    color: white;
+    background-color: #2f3f49;
+    border:1px solid #14232e;
+}
+
+.table{
+    background-color: #2f3f49;
+    text-decoration-color: aliceblue;
+}
+
+.table th{
+    color: white;
+}
+
+.table tbody tr{
+    color: white;
+}
+
+.table-row-design{
+background-color: transparent;
+}
