@@ -1,9 +1,11 @@
 ## About this Project
 
-=>This is a react and typescript project which is created to show the crypto currency updates from a public API.  
+=>Created a React app with typescript to show crypto updates and currency conversion from the following API.
+
 => The API : https://api.coincap.io/v2/exchanges
+
+=> Used NASA public API to show daily astronomical image, also used typescript.
 
 ## Tech-stack
 
-=> Typescript, React JS  
-=> React router
+=> Typescript, React JS
