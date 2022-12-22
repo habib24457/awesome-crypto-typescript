@@ -13,9 +13,12 @@
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
     "react": "^18.2.0",
+    "react-calendar": "^4.0.0",
     "react-dom": "^18.2.0",
+    "react-flagkit": "^2.0.4",
+    "react-loading-skeleton": "^3.1.0",
     "react-router-dom": "^6.4.5",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "typescript": "^4.9.4",
     "web-vitals": "^2.1.4"
   },
@@ -42,5 +45,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.17.10",
+    "@types/react-calendar": "^3.9.0"
   }
 }

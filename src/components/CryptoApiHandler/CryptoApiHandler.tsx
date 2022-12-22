@@ -6,7 +6,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import ExchangeRateList from "./ExchangeRateList";
 import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+//import "react-loading-skeleton/dist/skeleton.css";
 import CryptoStatistics from "../CryptoConverter/CryptoConverter";
 
 const CryptoApiHandler = () => {

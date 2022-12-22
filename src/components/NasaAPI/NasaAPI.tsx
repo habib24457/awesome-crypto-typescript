@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { INasaData } from "../Interfaces/Index";
 import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+//import "react-loading-skeleton/dist/skeleton.css";
 
 const NasaAPI = () => {
   const key = process.env.REACT_APP_NASA_API_KEY;
