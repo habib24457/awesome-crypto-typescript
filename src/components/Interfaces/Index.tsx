@@ -9,3 +9,11 @@ export interface ICrypto {
   updated: string;
   volumeUsd: string;
 }
+
+export interface IExRates {
+  USD: number;
+  EUR: number;
+  BDT: number;
+  ANG: number;
+  CAD: number;
+}

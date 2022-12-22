@@ -4,7 +4,7 @@
 }
 
 .home{
-    background-color: #282c34;
+    background-color: #fafafa;
     height: 100vh;
     width: 100vw;
 }
@@ -22,7 +22,7 @@
     box-sizing: content-box;
     position: relative;
     outline: none;
-    color: white;
+    color: rgb(50, 47, 47);
     font-size: larger;
     font-weight: bold;
   }

@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { ICrypto } from "../Interfaces/Index";
+import { ICrypto, IExRates } from "../Interfaces/Index";
 import axios from "axios";
 import "./CryptoApiHandler.css";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import ExchangeRateList from "./ExchangeRateList";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const CryptoApiHandler = () => {
   const defaultCryptoData: ICrypto = {
@@ -16,27 +21,42 @@ const CryptoApiHandler = () => {
     volumeUsd: "",
   };
   const [cryptoData, setCryptoData] = useState<ICrypto[]>([defaultCryptoData]);
+  const [exchangeRates, setExchangeRates] = useState<IExRates>({
+    USD: 0,
+    EUR: 0,
+    BDT: 0,
+    ANG: 0,
+    CAD: 0,
+  });
+  const [value, onChange] = useState(new Date());
+  const key: string = "d43e33eb9710dc572c44c5e5c1dac285&base";
   const config = {
     method: "GET",
     url: "https://api.coincap.io/v2/exchanges",
     headers: {},
   };
+  const [isExRatesLoaded, setIsExRatesLoaded] = useState(false);
+  const [isCryptoLoaded, setIsCryptoLoaded] = useState(false);
 
   useEffect(() => {
     getCryptoData();
     // eslint-disable-next-line
   }, []);
 
-  const getCryptoData = () => {
-    axios(config)
+  useEffect(() => {
+    getExchangeRateByDate();
+  }, [value]);
+
+  const getCryptoData = async () => {
+    await axios(config)
       .then((response) => JSON.parse(JSON.stringify(response.data)))
       .then((result) => {
         const newCryptoArr: ICrypto[] = [];
-
         const resultData: ICrypto[] = result.data.slice(0, 10);
 
         resultData.map((singleCrypto: ICrypto) => {
           const newData: ICrypto = { ...defaultCryptoData };
+          //newData.exchangeId = singleCrypto.exchangeId;
           newData.name = singleCrypto.exchangeId;
           newData.updated = singleCrypto.updated;
           newData.volumeUsd = convertCurrency(singleCrypto.volumeUsd);
@@ -48,13 +68,8 @@ const CryptoApiHandler = () => {
           newData.exchangeUrl = singleCrypto.exchangeUrl;
           return newCryptoArr.push(newData);
         });
-
-        console.log(newCryptoArr);
-
         setCryptoData(newCryptoArr);
-        // const crypto: ICrypto[] = resultData.map((singleData: ICrypto) =>
-        //   console.log(singleData)
-        // );
+        setIsCryptoLoaded(true);
       })
       .catch((error) => {
         console.log(error);
@@ -79,57 +94,81 @@ const CryptoApiHandler = () => {
       : Math.abs(Number(labelValue)).toString();
   };
 
-  // const getCurrencyExchange = () => {
-  //   fetch(
-  //     "https://api.currencybeacon.com/v1/latest?api_key=d43e33eb9710dc572c44c5e5c1dac285"
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data))
-  //     .catch((err) => console.log(err));
-  // };
+  const getExchangeRateByDate = async () => {
+    const selectedDate = value.toLocaleDateString("en-CA");
+    const exchangeRateConfig = {
+      method: "GET",
+      url: `https://api.currencybeacon.com/v1/historical?api_key=${key}=USD&date=${selectedDate}`,
+    };
 
-  //console.log(cryptoData);
+    await axios(exchangeRateConfig)
+      .then((response) => JSON.parse(JSON.stringify(response.data)))
+      .then((data) => {
+        const newRates = { ...exchangeRates };
+        newRates.USD = data.response.rates.USD;
+        newRates.ANG = data.response.rates.ANG;
+        newRates.EUR = data.response.rates.EUR;
+        newRates.CAD = data.response.rates.CAD;
+        newRates.BDT = data.response.rates.BDT;
+        setExchangeRates(newRates);
+        setIsExRatesLoaded(true);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  console.log(exchangeRates);
 
   return (
     <div className="row">
       <div className="col-5 table-wrapper mt-2">
-        <h5 className="text-design">
-          Top 10 Crypto: (API:https://api.currencybeacon.com/ )
-        </h5>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Crypto</th>
-              <th scope="col">Rate ($)</th>
-              <th scope="col">Volume (%)</th>
-              <th scope="col">Updated</th>
-              <th scope="col">Site</th>
-            </tr>
-          </thead>
-
-          <tbody className="table-data">
-            {cryptoData.map((singleCrypto: ICrypto) => (
-              <tr className="table-row-design">
-                <td>{singleCrypto.name}</td>
-                <td>{singleCrypto.volumeUsd}</td>
-                <td>{singleCrypto.percentTotalVolume}</td>
-                <td>{singleCrypto.updated}</td>
-                <td>
-                  <a
-                    href={singleCrypto.exchangeUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <button className="button-design">Visit</button>
-                  </a>
-                </td>
+        <h6 className="text-design">Top 10 Crypto</h6>
+        {isCryptoLoaded ? (
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">Crypto</th>
+                <th scope="col">Rate ($)</th>
+                <th scope="col">Volume (%)</th>
+                <th scope="col">Statistics</th>
+                <th scope="col">Site</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody className="table-data">
+              {cryptoData.map((singleCrypto: ICrypto) => (
+                <tr key={singleCrypto.name} className="table-row-design">
+                  <td>{singleCrypto.name}</td>
+                  <td>{singleCrypto.volumeUsd}</td>
+                  <td>{singleCrypto.percentTotalVolume}</td>
+                  <td>{singleCrypto.updated}</td>
+                  <td>
+                    <a
+                      href={singleCrypto.exchangeUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <button className="button-design">Visit</button>
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <Skeleton count={10} />
+        )}
       </div>
-      <div className="col-4"></div>
-      <div className="col-2"></div>
+      <div className="col-3 mt-4">
+        <h6>Select a date to see the exchange rates</h6>
+        <Calendar onChange={onChange} value={value} maxDate={new Date()} />
+      </div>
+      <div className="col-3 mt-5">
+        {isExRatesLoaded ? (
+          <ExchangeRateList exchangeRates={exchangeRates} />
+        ) : (
+          <Skeleton count={5} />
+        )}
+      </div>
     </div>
   );
 };
