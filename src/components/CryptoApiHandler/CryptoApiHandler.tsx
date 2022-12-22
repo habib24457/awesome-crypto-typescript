@@ -7,6 +7,7 @@ import "react-calendar/dist/Calendar.css";
 import ExchangeRateList from "./ExchangeRateList";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import CryptoStatistics from "../CryptoConverter/CryptoConverter";
 
 const CryptoApiHandler = () => {
   const defaultCryptoData: ICrypto = {
@@ -45,6 +46,7 @@ const CryptoApiHandler = () => {
 
   useEffect(() => {
     getExchangeRateByDate();
+    // eslint-disable-next-line
   }, [value]);
 
   const getCryptoData = async () => {
@@ -119,9 +121,12 @@ const CryptoApiHandler = () => {
   console.log(exchangeRates);
 
   return (
-    <div className="row">
+    <div className="row mt-5">
+      <div className="col-1"></div>
+
       <div className="col-5 table-wrapper mt-2">
         <h6 className="text-design">Top 10 Crypto</h6>
+        <hr />
         {isCryptoLoaded ? (
           <table className="table">
             <thead>
@@ -158,17 +163,33 @@ const CryptoApiHandler = () => {
           <Skeleton count={10} />
         )}
       </div>
-      <div className="col-3 mt-4">
-        <h6>Select a date to see the exchange rates</h6>
-        <Calendar onChange={onChange} value={value} maxDate={new Date()} />
+
+      <div className="col-5">
+        <div className="row">
+          <div className="col-6 calender-col">
+            <h6>Select a date to see the exchange rates</h6>
+            <Calendar onChange={onChange} value={value} maxDate={new Date()} />
+          </div>
+
+          <div className="col-6 mt-4 calender-col">
+            {isExRatesLoaded ? (
+              <ExchangeRateList exchangeRates={exchangeRates} />
+            ) : (
+              <Skeleton count={5} />
+            )}
+          </div>
+        </div>{" "}
+        {/**end ot sub row-1 */}
+        <div className="row mt-4 stat-row">
+          <CryptoStatistics />
+        </div>
+        {/**End of sub row-2*/}
+        <div className="row mt-5">
+          <div className="col-12">API Source:https://currencybeacon.com</div>
+        </div>
       </div>
-      <div className="col-3 mt-5">
-        {isExRatesLoaded ? (
-          <ExchangeRateList exchangeRates={exchangeRates} />
-        ) : (
-          <Skeleton count={5} />
-        )}
-      </div>
+      {/**End of column*/}
+      <div className="col-1"></div>
     </div>
   );
 };

@@ -15,18 +15,31 @@
 }
 
 .table{
-    background-color: #2f3f49;
-    text-decoration-color: aliceblue;
+    background-color: transparent;
+    text-decoration-color: rgb(28, 28, 28);
+    border-right: 1px solid black;
 }
 
 .table th{
-    color: white;
+    color: rgb(19, 19, 19);
 }
 
 .table tbody tr{
-    color: white;
+    color: rgb(89, 148, 174);
 }
 
 .table-row-design{
 background-color: transparent;
+}
+
+.calender-col{
+    border-right: 1px solid rgb(112, 106, 106);
+    border-bottom: 1px solid rgb(112, 106, 106);
+}
+
+.stat-row{
+    border-left: 1px solid rgb(112, 106, 106);
+    border-right: 1px solid rgb(112, 106, 106);
+    border-bottom: 1px solid rgb(112, 106, 106);
+
 }

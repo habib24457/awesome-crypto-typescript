@@ -17,3 +17,10 @@ export interface IExRates {
   ANG: number;
   CAD: number;
 }
+
+export interface IConverted {
+  from: string;
+  date: string;
+  value: number;
+  to: string;
+}

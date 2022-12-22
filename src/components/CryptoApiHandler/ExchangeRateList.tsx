@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { IExRates } from "../Interfaces/Index";
 import Flag from "react-flagkit";
 

@@ -1,0 +1,12 @@
+.button-design{
+    height: 35px;
+    width: 65px;
+    color: white;
+    background-color: #2f3f49;
+    border:1px solid #14232e;
+}
+
+.converted-res{
+    border-left: 1px dotted rgb(112, 106, 106);
+    border-right: 1px dotted rgb(112, 106, 106);
+}
