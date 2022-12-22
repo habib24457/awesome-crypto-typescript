@@ -24,7 +24,7 @@ const CryptoApiHandler = () => {
 
   useEffect(() => {
     getCryptoData();
-    //getCurrencyExchange();
+    // eslint-disable-next-line
   }, []);
 
   const getCryptoData = () => {
@@ -46,7 +46,7 @@ const CryptoApiHandler = () => {
           const date = new Date(singleCrypto.updated).toLocaleDateString();
           newData.updated = date;
           newData.exchangeUrl = singleCrypto.exchangeUrl;
-          newCryptoArr.push(newData);
+          return newCryptoArr.push(newData);
         });
 
         console.log(newCryptoArr);
@@ -79,14 +79,14 @@ const CryptoApiHandler = () => {
       : Math.abs(Number(labelValue)).toString();
   };
 
-  const getCurrencyExchange = () => {
-    fetch(
-      "https://api.currencybeacon.com/v1/latest?api_key=d43e33eb9710dc572c44c5e5c1dac285"
-    )
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
-  };
+  // const getCurrencyExchange = () => {
+  //   fetch(
+  //     "https://api.currencybeacon.com/v1/latest?api_key=d43e33eb9710dc572c44c5e5c1dac285"
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => console.log(data))
+  //     .catch((err) => console.log(err));
+  // };
 
   //console.log(cryptoData);
 
@@ -115,7 +115,11 @@ const CryptoApiHandler = () => {
                 <td>{singleCrypto.percentTotalVolume}</td>
                 <td>{singleCrypto.updated}</td>
                 <td>
-                  <a href={singleCrypto.exchangeUrl} target="_blank">
+                  <a
+                    href={singleCrypto.exchangeUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <button className="button-design">Visit</button>
                   </a>
                 </td>
