@@ -33,6 +33,7 @@ const NasaAPI = () => {
       .catch((error) => {
         setIsLoaded(false);
       });
+    // eslint-disable-next-line
   }, []);
 
   return (
