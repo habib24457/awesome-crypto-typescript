@@ -24,3 +24,12 @@ export interface IConverted {
   value: number;
   to: string;
 }
+
+export interface INasaData {
+  copyright: string;
+  date: string;
+  explanation: string;
+  hdurl: string;
+  title: string;
+  url: string;
+}

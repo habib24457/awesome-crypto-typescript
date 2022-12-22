@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Home.css";
 import CryptoApiHandler from "../CryptoApiHandler/CryptoApiHandler";
+import NasaAPI from "../NasaAPI/NasaAPI";
 
 const Home = () => {
   const [navIndex, setNavIndex] = useState<Number>(1);
@@ -21,7 +22,7 @@ const Home = () => {
                 className={navIndex === 2 ? "tabs active-tabs" : "tabs"}
                 onClick={() => setNavIndex(2)}
               >
-                Check Crypto News
+                Check Daily photo from NASA
               </button>
             </div>
           </div>
@@ -30,6 +31,7 @@ const Home = () => {
 
       <div className="component-stage">
         {navIndex === 1 && <CryptoApiHandler />}
+        {navIndex === 2 && <NasaAPI />}
       </div>
     </div>
   );

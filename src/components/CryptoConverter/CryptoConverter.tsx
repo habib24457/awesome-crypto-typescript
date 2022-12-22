@@ -7,7 +7,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const CryptoConverter = () => {
-  const key: string = "d43e33eb9710dc572c44c5e5c1dac285&base";
+  const key = process.env.REACT_APP_COIN_API_KEY;
   const [fromVal, setFromVal] = useState("USD");
   const [toVal, setToVal] = useState("USD");
   const [amountVal, setAmountVal] = useState(0);

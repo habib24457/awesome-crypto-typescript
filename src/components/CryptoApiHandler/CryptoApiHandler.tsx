@@ -30,7 +30,7 @@ const CryptoApiHandler = () => {
     CAD: 0,
   });
   const [value, onChange] = useState(new Date());
-  const key: string = "d43e33eb9710dc572c44c5e5c1dac285&base";
+  const key = process.env.REACT_APP_COIN_API_KEY;
   const config = {
     method: "GET",
     url: "https://api.coincap.io/v2/exchanges",
@@ -74,6 +74,7 @@ const CryptoApiHandler = () => {
         setIsCryptoLoaded(true);
       })
       .catch((error) => {
+        setIsCryptoLoaded(false);
         console.log(error);
       });
   };
