@@ -9,3 +9,7 @@
 ## Tech-stack
 
 => Typescript, React JS
+
+## Live Site :
+
+https://funny-pavlova-88e535.netlify.app/
