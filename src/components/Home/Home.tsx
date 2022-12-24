@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Home.css";
 import CryptoApiHandler from "../CryptoApiHandler/CryptoApiHandler";
 import NasaAPI from "../NasaAPI/NasaAPI";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
   const [navIndex, setNavIndex] = useState<Number>(1);
@@ -32,6 +33,10 @@ const Home = () => {
       <div className="component-stage">
         {navIndex === 1 && <CryptoApiHandler />}
         {navIndex === 2 && <NasaAPI />}
+      </div>
+
+      <div className="footer">
+        <Footer />
       </div>
     </div>
   );

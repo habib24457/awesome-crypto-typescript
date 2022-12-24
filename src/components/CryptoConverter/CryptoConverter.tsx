@@ -5,6 +5,8 @@ import "bootstrap";
 import { IConverted } from "../Interfaces/Index";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 const CryptoConverter = () => {
   const key = process.env.REACT_APP_COIN_API_KEY;
@@ -64,8 +66,8 @@ const CryptoConverter = () => {
   //console.log("Drop", fromVal);
 
   return (
-    <div className="row">
-      <div className="col-3">
+    <>
+      <div className="col-md-3">
         <div className="btn-group">
           <button
             type="button"
@@ -109,7 +111,7 @@ const CryptoConverter = () => {
           </ul>
         </div>
       </div>
-      <div className="col-3">
+      <div className="col-md-3">
         <input
           id="amount-input"
           type="text"
@@ -120,7 +122,7 @@ const CryptoConverter = () => {
           value={amountVal}
         />
       </div>
-      <div className="col-3">
+      <div className="col-md-3">
         <div className="btn-group">
           <button
             type="button"
@@ -165,37 +167,46 @@ const CryptoConverter = () => {
         </div>
       </div>
 
-      <div className="col-3">
+      <div className="col-md-3">
         {isValid ? (
           <button onClick={() => converter()} className="btn btn-outline-dark">
             Convert
           </button>
         ) : (
           <div>
-            <p>Input has to be a number and you must select the Currencies.</p>
+            <ul style={{ listStyle: "none" }}>
+              <li>
+                <FontAwesomeIcon icon={faCircleCheck} className="fa-des" />
+                Input has to be a number
+              </li>
+              <li>
+                <FontAwesomeIcon icon={faCircleCheck} className="fa-des" />
+                you must select the Currencies.
+              </li>
+            </ul>
           </div>
         )}
       </div>
 
-      <div className="row mt-5">
-        <div className="col-4"></div>
-        <div className="col-4 converted-res">
+      <div className="row mt-3">
+        <div className="col-md-4"></div>
+        <div className="col-md-4 converted-res">
           {isLoaded ? (
             <>
               <h5>
                 Converted to:{" "}
                 <span className="text-success">{convertedData.to}</span>
               </h5>
-              <h6>Amount: {convertedData.value}</h6>
+              <h6>Amount: {convertedData.value.toFixed(2)}</h6>
               <h6>Date: {convertedData.date}</h6>
             </>
           ) : (
             <Skeleton count={4} />
           )}
         </div>
-        <div className="col-4"></div>
+        <div className="col-md-4"></div>
       </div>
-    </div>
+    </>
   );
 };
 

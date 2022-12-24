@@ -7,7 +7,13 @@ import "react-calendar/dist/Calendar.css";
 import ExchangeRateList from "./ExchangeRateList";
 import Skeleton from "react-loading-skeleton";
 //import "react-loading-skeleton/dist/skeleton.css";
-import CryptoStatistics from "../CryptoConverter/CryptoConverter";
+import CryptoConverter from "../CryptoConverter/CryptoConverter";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMoneyBillTransfer,
+  faBitcoinSign,
+  faHandHoldingDollar,
+} from "@fortawesome/free-solid-svg-icons";
 
 const CryptoApiHandler = () => {
   const defaultCryptoData: ICrypto = {
@@ -123,10 +129,13 @@ const CryptoApiHandler = () => {
 
   return (
     <div className="row mt-5">
-      <div className="col-1"></div>
+      <div className="col-md-1"></div>
 
-      <div className="col-5 table-wrapper mt-2">
-        <h6 className="text-design">Top 10 Crypto</h6>
+      <div className="col-md-5 table-wrapper mt-2 mb-5">
+        <h3 className="text-design">
+          <FontAwesomeIcon icon={faBitcoinSign} className="fa-des" />
+          Top 10 Crypto
+        </h3>
         <hr />
         {isCryptoLoaded ? (
           <table className="table">
@@ -135,7 +144,7 @@ const CryptoApiHandler = () => {
                 <th scope="col">Crypto</th>
                 <th scope="col">Rate ($)</th>
                 <th scope="col">Volume (%)</th>
-                <th scope="col">Statistics</th>
+                <th scope="col">Last update</th>
                 <th scope="col">Site</th>
               </tr>
             </thead>
@@ -165,32 +174,46 @@ const CryptoApiHandler = () => {
         )}
       </div>
 
-      <div className="col-5">
+      <div className="col-md-5">
         <div className="row">
-          <div className="col-6 calender-col">
-            <h6>Select a date to see the exchange rates</h6>
+          <div className="col-md-6">
+            <div style={{ display: "flex" }}>
+              <h1>
+                <FontAwesomeIcon icon={faHandHoldingDollar} />
+              </h1>
+              <h6> Select a date to see the exchange rates</h6>
+            </div>
             <Calendar onChange={onChange} value={value} maxDate={new Date()} />
           </div>
-
-          <div className="col-6 mt-4 calender-col">
-            {isExRatesLoaded ? (
-              <ExchangeRateList exchangeRates={exchangeRates} />
-            ) : (
-              <Skeleton count={5} />
-            )}
+          <div className="col-md-6">
+            <div className="mt-5">
+              {isExRatesLoaded ? (
+                <ExchangeRateList exchangeRates={exchangeRates} />
+              ) : (
+                <Skeleton count={5} />
+              )}
+            </div>
           </div>
-        </div>{" "}
-        {/**end ot sub row-1 */}
-        <div className="row mt-4 stat-row">
-          <CryptoStatistics />
         </div>
-        {/**End of sub row-2*/}
+
         <div className="row mt-5">
-          <div className="col-12">API Source:https://currencybeacon.com</div>
+          <h5>
+            <FontAwesomeIcon icon={faMoneyBillTransfer} className="fa-des" />
+            Convert currency
+          </h5>
+          <CryptoConverter />
         </div>
       </div>
-      {/**End of column*/}
-      <div className="col-1"></div>
+
+      {/* <div className="row mt-4 stat-row">
+          <CryptoConverter />
+        </div>
+
+        <div className="row mt-5">
+          <div className="col-12">API Source:https://currencybeacon.com</div>
+        </div> */}
+
+      <div className="col-md-1"></div>
     </div>
   );
 };

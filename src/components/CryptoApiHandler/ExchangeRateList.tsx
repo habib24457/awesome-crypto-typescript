@@ -17,7 +17,7 @@ const ExchangeRateList = ({ exchangeRates }: Props) => {
             USD <Flag country="US" />
           </div>
           <span className="badge bg-primary rounded-pill">
-            {exchangeRates.USD} $
+            {exchangeRates.USD.toFixed(2)} $
           </span>
         </li>
         <li className="list-group-item d-flex justify-content-between align-items-start">
@@ -26,7 +26,7 @@ const ExchangeRateList = ({ exchangeRates }: Props) => {
             EUR <Flag country="DE" />
           </div>
           <span className="badge bg-success rounded-pill">
-            {exchangeRates.EUR} €
+            {exchangeRates.EUR.toFixed(2)} €
           </span>
         </li>
         <li className="list-group-item d-flex justify-content-between align-items-start">
@@ -35,7 +35,7 @@ const ExchangeRateList = ({ exchangeRates }: Props) => {
             CAD <Flag country="CA" />
           </div>
           <span className="badge bg-success rounded-pill">
-            {exchangeRates.CAD} $
+            {exchangeRates.CAD.toFixed(2)} $
           </span>
         </li>
         <li className="list-group-item d-flex justify-content-between align-items-start">
@@ -44,7 +44,7 @@ const ExchangeRateList = ({ exchangeRates }: Props) => {
             BDT <Flag country="BD" />
           </div>
           <span className="badge bg-success rounded-pill">
-            {exchangeRates.BDT} ৳
+            {exchangeRates.BDT.toFixed(2)} ৳
           </span>
         </li>
       </ol>
