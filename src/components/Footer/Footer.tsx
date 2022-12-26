@@ -41,7 +41,7 @@ const Footer = () => {
           </li>
           <li>
             <FontAwesomeIcon icon={faCircleCheck} className="fa-des" />
-            For Daily NASA Photo: https://apod.nasa.gov
+            For Daily Crypto News: Rapid API: crypto-news-16
           </li>
         </ul>
       </div>

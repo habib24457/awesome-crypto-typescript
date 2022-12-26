@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Home.css";
 import CryptoApiHandler from "../CryptoApiHandler/CryptoApiHandler";
-import NasaAPI from "../NasaAPI/NasaAPI";
+//import NasaAPI from "../NasaAPI/NasaAPI";
 import Footer from "../Footer/Footer";
+import CryptoNews from "../CryptoNews/CryptoNews";
 
 const Home = () => {
   const [navIndex, setNavIndex] = useState<Number>(1);
@@ -23,7 +24,7 @@ const Home = () => {
                 className={navIndex === 2 ? "tabs active-tabs" : "tabs"}
                 onClick={() => setNavIndex(2)}
               >
-                Check Daily photo from NASA
+                Check Daily Crypto News
               </button>
             </div>
           </div>
@@ -32,7 +33,7 @@ const Home = () => {
 
       <div className="component-stage">
         {navIndex === 1 && <CryptoApiHandler />}
-        {navIndex === 2 && <NasaAPI />}
+        {navIndex === 2 && <CryptoNews />}
       </div>
 
       <div className="footer">

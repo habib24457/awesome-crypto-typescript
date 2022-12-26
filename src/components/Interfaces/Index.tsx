@@ -33,3 +33,10 @@ export interface INasaData {
   title: string;
   url: string;
 }
+
+export interface ICryptoNews {
+  date: string;
+  description: string;
+  title: string;
+  url: string;
+}
