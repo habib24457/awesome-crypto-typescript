@@ -105,6 +105,7 @@ const CryptoApiHandler = () => {
 
   const getExchangeRateByDate = async () => {
     const selectedDate = value.toLocaleDateString("en-CA");
+    console.log(selectedDate);
     const exchangeRateConfig = {
       method: "GET",
       url: `https://api.currencybeacon.com/v1/historical?api_key=${key}=USD&date=${selectedDate}`,
@@ -113,19 +114,27 @@ const CryptoApiHandler = () => {
     await axios(exchangeRateConfig)
       .then((response) => JSON.parse(JSON.stringify(response.data)))
       .then((data) => {
-        const newRates = { ...exchangeRates };
-        newRates.USD = data.response.rates.USD;
-        newRates.ANG = data.response.rates.ANG;
-        newRates.EUR = data.response.rates.EUR;
-        newRates.CAD = data.response.rates.CAD;
-        newRates.BDT = data.response.rates.BDT;
-        setExchangeRates(newRates);
-        setIsExRatesLoaded(true);
+        console.log(data);
+        if (data.response.rates.length === 0) {
+          setIsExRatesLoaded(false);
+        } else {
+          const newRates = { ...exchangeRates };
+          newRates.USD = data.response.rates.USD;
+          newRates.ANG = data.response.rates.ANG;
+          newRates.EUR = data.response.rates.EUR;
+          newRates.CAD = data.response.rates.CAD;
+          newRates.BDT = data.response.rates.BDT;
+          setExchangeRates(newRates);
+          setIsExRatesLoaded(true);
+        }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setIsExRatesLoaded(false);
+        console.log(error);
+      });
   };
 
-  console.log(exchangeRates);
+  //console.log(exchangeRates);
 
   return (
     <div className="row mt-5">
@@ -190,7 +199,13 @@ const CryptoApiHandler = () => {
               {isExRatesLoaded ? (
                 <ExchangeRateList exchangeRates={exchangeRates} />
               ) : (
-                <Skeleton count={5} />
+                <div>
+                  <p>
+                    Exchange rate for this date is not available yet. Select
+                    another date
+                  </p>
+                  <Skeleton count={5} />
+                </div>
               )}
             </div>
           </div>

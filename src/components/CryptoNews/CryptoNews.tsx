@@ -22,6 +22,9 @@ const CryptoNews = () => {
       url: "",
     },
   ]);
+  const key = process.env.REACT_APP_RAPID_API_KEY;
+
+  console.log(key);
 
   const options = {
     method: "GET",

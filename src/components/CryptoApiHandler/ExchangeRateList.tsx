@@ -7,7 +7,7 @@ type Props = {
 };
 
 const ExchangeRateList = ({ exchangeRates }: Props) => {
-  console.log(exchangeRates);
+  //console.log(exchangeRates);
   return (
     <div>
       <ol className="list-group list-group-numbered">
@@ -17,7 +17,7 @@ const ExchangeRateList = ({ exchangeRates }: Props) => {
             USD <Flag country="US" />
           </div>
           <span className="badge bg-primary rounded-pill">
-            {exchangeRates.USD.toFixed(2)} $
+            {exchangeRates?.USD} $
           </span>
         </li>
         <li className="list-group-item d-flex justify-content-between align-items-start">
@@ -26,7 +26,7 @@ const ExchangeRateList = ({ exchangeRates }: Props) => {
             EUR <Flag country="DE" />
           </div>
           <span className="badge bg-success rounded-pill">
-            {exchangeRates.EUR.toFixed(2)} €
+            {exchangeRates?.EUR} €
           </span>
         </li>
         <li className="list-group-item d-flex justify-content-between align-items-start">
@@ -35,7 +35,7 @@ const ExchangeRateList = ({ exchangeRates }: Props) => {
             CAD <Flag country="CA" />
           </div>
           <span className="badge bg-success rounded-pill">
-            {exchangeRates.CAD.toFixed(2)} $
+            {exchangeRates?.CAD} $
           </span>
         </li>
         <li className="list-group-item d-flex justify-content-between align-items-start">
@@ -44,7 +44,7 @@ const ExchangeRateList = ({ exchangeRates }: Props) => {
             BDT <Flag country="BD" />
           </div>
           <span className="badge bg-success rounded-pill">
-            {exchangeRates.BDT.toFixed(2)} ৳
+            {exchangeRates?.BDT} ৳
           </span>
         </li>
       </ol>
